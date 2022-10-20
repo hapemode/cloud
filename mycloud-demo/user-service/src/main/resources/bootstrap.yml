@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: userserver # 服务名称
+  profiles:
+    active: dev #开发环境，这里是dev   name+active=配置中心相关配置文件名称（userserver-dev.yaml）
+  cloud:
+    nacos:
+      server-addr: 192.168.250.10:8848 # Nacos地址
+      config:
+        file-extension: yaml # 文件后缀名

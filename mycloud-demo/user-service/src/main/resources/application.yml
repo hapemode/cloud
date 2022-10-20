@@ -1,0 +1,45 @@
+server:
+  port: 9080
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/cloud_user?userUnicode=true&characterEncoding=utf-8&serverTimeZone=GMT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: userserver
+  cloud:
+    sentinel: # sentinel降级熔断
+      transport:
+        dashboard: 192.168.250.10:8080
+#        dashboard: localhost:8080
+    nacos:
+      server-addr: 192.168.250.10:8848
+      discovery:
+        cluster-name: HZ #配置服务集群
+#        cluster-name: SH #配置服务集群
+        namespace: 1c5ce879-6c87-45f1-9abf-4c1a62257cd0 #  命名空间进行环境隔离
+
+mybatis:
+  type-aliases-package: com.ppx.user.entity
+  mapper-locations: classpath:/mybatis/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:10086/eureka
+
+logging:
+  level:
+    com.ppx: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+
+# 配置 文件优先级 nacos(服务名-profile.yaml)->nacos(服务名.yaml)->本地
+pattern:
+  name: 本地环境配置文件
